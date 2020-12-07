@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Bean;
 
 //启动类
 @SpringBootApplication
-@EnableEurekaClient //在服务启动后自动注册到Eureka中！
-@EnableDiscoveryClient //服务发现~
+@EnableEurekaClient // 在服务启动后、自动注册到Eureka中
+@EnableDiscoveryClient //服务发现
 // @EnableCircuitBreaker //
 public class DeptProvider_8001 {
     public static void main(String[] args) {
