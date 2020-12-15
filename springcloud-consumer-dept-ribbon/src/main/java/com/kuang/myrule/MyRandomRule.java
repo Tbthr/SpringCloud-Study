@@ -6,13 +6,16 @@ import com.netflix.loadbalancer.ILoadBalancer;
 import com.netflix.loadbalancer.Server;
 
 import java.util.List;
+// 每个服务，访问5次，换下一个服务
+public class MyRandomRule extends AbstractLoadBalancerRule {
+// 放在主程序的上级目录中，仅供该服务使用
+// 若与主程序同级，则共享于所有服务
 
-
-public class KuangRandomRule extends AbstractLoadBalancerRule {
-
-    //每个服务，访问5次~，换下一个服务（3个）
-    // total=0, 默认=0，如果=5，我们指向下一个服务节点
-    // index=0，默认0，如果total=5，index+1，
+// IRule：
+//      RoundRobinRule 轮询
+//      RandomRule 随机
+//      AvailabilityFilteringRule 会先过滤掉 访问故障的服务（跳闸），对剩下的进行轮询
+//      RetryRule 会先按照轮询获取服务。如果服务获取失败，则会在指定的时间内进行重试
 
     private int total = 0; //被调用的次数
     private int currentIndex = 0; //当前是谁在提供服务~
@@ -21,9 +24,9 @@ public class KuangRandomRule extends AbstractLoadBalancerRule {
         if (lb == null) {
             return null;
         }
-        Server server = null;
+        Server server;
 
-        while (server == null) {
+        while (true) {
 
             if (Thread.interrupted()) {
                 return null;
@@ -58,10 +61,8 @@ public class KuangRandomRule extends AbstractLoadBalancerRule {
                 return (server);
             }
 
-            server = null;
             Thread.yield();
         }
-        return server;
     }
 
     @Override

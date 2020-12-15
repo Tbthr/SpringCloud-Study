@@ -2,7 +2,6 @@ package com.kuang.springcloud.controller;
 
 import com.kuang.springcloud.pojo.Dept;
 import com.kuang.springcloud.service.DeptService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 
-//提供Restful服务！
 @RestController
 public class DeptController {
-
     @Resource
     private DeptService deptService;
 

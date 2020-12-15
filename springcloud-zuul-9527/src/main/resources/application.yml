@@ -8,7 +8,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+      defaultZone: http://eureka7001.com:7001/,http://eureka7002.com:7002/,http://eureka7003.com:7003/
   instance:
     instance-id: zuul9527.com
     prefer-ip-address: true
@@ -19,7 +19,24 @@ info:
 
 zuul:
   routes:
+    # 下面两个等价
+    # springcloud-provider-dept: /mydept/** #和下面等价{服务名称：路径}
     mydept.serviceId: springcloud-provider-dept # 服务名称
     mydept.path: /mydept/** # 替代服务名称
   ignored-services: "*"  # 不能再使用这个路径访问了，ignored：忽略,隐藏全部的~
   prefix: /kuang # 设置公共的前缀
+
+##使用url和path之间映射，不能使用负载均衡功能。
+#zuul:
+#  routes:
+#  #指定url和path之间映射
+#    url: http://localhost:8000/
+#    path: /rest/**
+##需要自己开启
+#ribbon:
+#  eureka:
+#    enable: false #为Ribbon禁用Eureka
+#
+#rest-demo: #服务名
+#  ribbon:
+#    listOfServers: localhost:8001,localhost:8002

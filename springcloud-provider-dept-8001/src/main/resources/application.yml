@@ -10,23 +10,29 @@ mybatis:
 #spring的配置
 spring:
   application:
-    name: springcloud-provider-dept # 应用名称
+    # 需要指明spring.application.name
+    # 这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name (feign,ribbon)
+    name: springcloud-provider-dept # Eureka中Application值(应用名称)
   datasource:
-    #    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/db_01?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     username: root
     password: 8880
-    type: com.alibaba.druid.pool.DruidDataSource
 
+# Eureka的配置
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka7001.com:7001/eureka/ # Eureka的配置，服务注册到哪里
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/ # 服务注册到哪个 Eureka注册中心
   instance:
     instance-id: springcloud-provider-dept8001 # 修改eureka上的默认描述信息
-    prefer-ip-address: true  # true,可以显示服务的IP地址
+    prefer-ip-address: true  # true 可以显示服务的IP地址
 
-#info配置
+#info配置 actuator完善监控信息
 info:
-  app.name: kuangshen-springcloud
-  company.name: blog.kuangstudy.com
+  app:
+    name: demo-springcloud
+    encoding: UTF-8
+    java:
+      source: 1.8
+      target: 1.8

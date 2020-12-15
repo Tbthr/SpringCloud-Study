@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class ConfigBean { //@Configuration -- spring  applicationContext.xml
+public class ConfigBean {
 
     @Bean
-    @LoadBalanced //Ribbon 配置负载均衡实现RestTemplate
+    @LoadBalanced //Ribbon 配置负载均衡(默认：轮询)
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }

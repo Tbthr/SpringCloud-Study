@@ -2,7 +2,6 @@ package com.kuang.springcloud.service;
 
 import com.kuang.springcloud.dao.DeptDao;
 import com.kuang.springcloud.pojo.Dept;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

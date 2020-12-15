@@ -9,15 +9,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-//提供Restful服务！
 @RestController
 public class DeptController {
-
     @Resource
     private DeptService deptService;
 
     @GetMapping("/dept/get/{id}")
     @HystrixCommand(fallbackMethod = "hystrixGet") //熔断机制，调用失败时调用hystrixGet
+//            , commandProperties = {
+//            // 开启断路器
+//            @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),
+//            // 请求次数
+//            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+//            // 时间窗口期
+//            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
+//            // 失败率
+//            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60")}
+//    ) //更多查看：HystrixCommandProperties
     public Dept get(@PathVariable("id") Long id) {
         Dept dept = deptService.queryById(id);
 

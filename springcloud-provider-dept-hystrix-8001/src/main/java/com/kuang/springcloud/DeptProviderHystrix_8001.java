@@ -9,7 +9,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 
-//启动类
+//服务熔断：服务端 某个服务超时或者异常，引起熔断 (保险丝)
+//
+//服务降级：客户端 从整体网站请求负载考虑，当某个服务熔断或者关闭之后，服务将不再被调用
+//        此时在客户端，我们可以准备一个 FallbackFactory，返回一个默认的值(缺省值)，整体的服务水平下降了
+//        但是，好歹能用,比直接挂掉强
 @SpringBootApplication
 @EnableEurekaClient //在服务启动后自动注册到Eureka中！
 @EnableDiscoveryClient //服务发现~

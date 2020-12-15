@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Component
-@FeignClient(value = "SPRINGCLOUD-PROVIDER-DEPT", fallbackFactory = DeptClientServiceFallbackFactory.class)
+// 通过@FeignClient(“服务名”)来指定调用哪个服务
+@FeignClient("SPRINGCLOUD-PROVIDER-DEPT")
+
+// (value=服务名称,fallbackFactory=降级策略)
+// @FeignClient(value = "SPRINGCLOUD-PROVIDER-DEPT", fallbackFactory = DeptClientServiceFallbackFactory.class)
 public interface DeptClientService {
 
     @GetMapping("/dept/get/{id}")
@@ -21,5 +25,4 @@ public interface DeptClientService {
 
     @PostMapping("/dept/add")
     boolean addDept(Dept dept);
-
 }

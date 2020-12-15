@@ -12,8 +12,7 @@ spring:
   application:
     name: springcloud-provider-dept
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    #    driver-class-name: org.gjt.mm.mysql.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/db_02?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     username: root
     password: 8880
@@ -28,5 +27,9 @@ eureka:
 
 #info配置
 info:
-  app.name: kuangshen-springcloud
-  company.name: blog.kuangstudy.com
+  app:
+    name: demo-springcloud
+    encoding: UTF-8
+    java:
+      source: 1.8
+      target: 1.8

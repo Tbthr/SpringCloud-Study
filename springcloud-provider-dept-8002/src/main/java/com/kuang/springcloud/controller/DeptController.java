@@ -16,9 +16,9 @@ import java.util.List;
 //提供Restful服务！
 @RestController
 public class DeptController {
-
     @Resource
     private DeptService deptService;
+
     //获取一些配置的信息，得到具体的微服务！
     @Resource
     private DiscoveryClient client;
